@@ -59,6 +59,22 @@
 
 <div align="center">
 
+## Dashboard Walkthrough
+
+<img src="demo_.gif" width="85%" alt="CricScope Demo Walkthrough" style="border-radius: 8px;"/>
+<br/><br/>
+<i>Real-time win probability with glassmorphism UI cards and dynamic team branding.</i>
+
+</div>
+
+<br/>
+
+---
+
+<br/>
+
+<div align="center">
+
 ## What is CricScope?
 
 </div>
@@ -392,3 +408,4 @@ git push origin feature/your-feature-name
 <img src="https://capsule-render.vercel.app/api?type=waving&color=d4af37&height=100&section=footer&animation=fadeIn" width="100%"/>
 
 </div>
+
