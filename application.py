@@ -20,8 +20,17 @@ if "page" not in st.session_state:
     st.session_state.page = "Dashboard"
 if "last_prediction" not in st.session_state:
     st.session_state.last_prediction = None
-
+if "theme" not in st.session_state:
+    st.session_state.theme = "Dark"
 # -----------------------------------
+# 1. Theme State Setup
+if "theme" not in st.session_state:
+    st.session_state.theme = "Dark"
+
+# 2. Sidebar mein Toggle Button
+with st.sidebar:
+    is_light = st.toggle("☀️ Light Mode", value=(st.session_state.theme == "Light"))
+    st.session_state.theme = "Light" if is_light else "Dark"
 # LUXURY CSS
 # -----------------------------------
 st.markdown("""
@@ -1130,5 +1139,91 @@ if st.session_state.page == "Analysis":
                 </div>
             </div>
         """, unsafe_allow_html=True)
+       # 3. Light Mode Override (Premium Faded Black & High Contrast Fix)
+if st.session_state.theme == "Light":
+    st.markdown("""
+    <style>
+    /* 1. Page Background: Blinding white ki jagah soft premium off-white */
+    [data-testid="stAppViewContainer"] { 
+        background-color: #F8FAFC !important; 
+        background-image: none !important; 
+    }
+    
+    /* 2. Sidebar Background: Depth dene ke liye thoda sa darker slate tone */
+    section[data-testid="stSidebar"] { 
+        background-color: #F1F5F9 !important; 
+        border-right: 1px solid #E2E8F0 !important;
+    }
+    
+    /* 3. Main Area Universal Reset: Sabhi custom classes ko stark black se "Faded Black (Slate)" kiya */
+    [data-testid="stAppViewContainer"] * {
+        color: #334155 !important; /* Beautiful faded charcoal black */
+        -webkit-text-fill-color: #334155 !important;
+        background-image: none !important;
+        background-clip: unset !important;
+    }
+    
+    /* Headings aur Main Title ko thoda zyada deep faded black kiya taaki hierarchy bani rahe */
+    [data-testid="stAppViewContainer"] h1, 
+    [data-testid="stAppViewContainer"] h2, 
+    [data-testid="stAppViewContainer"] h3,
+    h1, h2, h3, .main-title {
+        color: #1E293B !important; /* Deep faded charcoal */
+        -webkit-text-fill-color: #1E293B !important;
+        font-weight: 700 !important;
+    }
+    
+    /* 4. Sidebar Text Reset: Social links aur Arnav ki info ko readable muted black kiya */
+    section[data-testid="stSidebar"] * {
+        color: #475569 !important;
+        -webkit-text-fill-color: #475569 !important;
+        background-image: none !important;
+    }
+    
+    /* 5. Statistical Cards Styling: Safed backgrounds soft borders ke saath */
+    div[data-testid="stBlock"] {
+        background-color: #FFFFFF !important; 
+        border: 1px solid #E2E8F0 !important;
+        border-radius: 12px !important;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05) !important;
+        padding: 20px !important;
+    }
+    div[data-testid="stBlock"] * {
+        color: #1E293B !important;
+    }
+    /* Metrics ke bade numbers ko clear stand-out tone diya */
+    [data-testid="stMetricValue"] div {
+        color: #0F172A !important;
+    }
+
+    /* 6. Input Fields and Dropdowns: Ab background clean white hoga aur text faded black */
+    input, select, textarea, 
+    div[data-baseweb="input"], 
+    div[data-baseweb="select"],
+    div[data-baseweb="input"] > div {
+        background-color: #FFFFFF !important;
+        color: #1E293B !important;
+        border: 1px solid #CBD5E1 !important;
+        border-radius: 8px !important;
+    }
+    
+    /* Input box ke andar jab typing karoge toh text sahi dikhega */
+    div[data-baseweb="input"] * {
+        color: #1E293B !important;
+        -webkit-text-fill-color: #1E293B !important;
+    }
+
+    /* 7. Controls & Buttons: Number inputs ke side wale '+' aur '-' buttons */
+    button, button[pills="true"] {
+        background-color: #F8FAFC !important;
+        color: #334155 !important;
+        border: 1px solid #CBD5E1 !important;
+    }
+    button:hover {
+        background-color: #E2E8F0 !important;
+        color: #0F172A !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
     st.markdown('</div>', unsafe_allow_html=True)  # close main-pad
